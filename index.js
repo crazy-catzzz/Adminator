@@ -38,7 +38,7 @@ client.on('message', message => {
 //||kick
 client.on('message', message => {
 
-  if (message.content.startsWith('||kick') && message.member.roles.cache.has('')) {
+  if (message.content.startsWith('||kick') && message.member.roles.cache.has('470942511762898945')) {
 
     const user = message.mentions.users.first();
     const dUser = message.mentions.users.first();
@@ -71,7 +71,7 @@ client.on('message', message => {
 //||ban
 client.on('message', message => {
 
-  if (message.content.startsWith('||ban') && message.member.roles.cache.has('')) {
+  if (message.content.startsWith('||ban') && message.member.roles.cache.has('470942511762898945')) {
     const user = message.mentions.users.first();
     const dUser = message.mentions.users.first();
     if (user) {
