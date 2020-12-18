@@ -8,6 +8,7 @@ client.on('ready', () => {
   console.log('I am ready!');
 });
 
+//DMs probably wonìt work cause I suck at JS lol
 
 //Welcome message
 client.on('guildMemberAdd', member => {
@@ -21,7 +22,7 @@ client.on('guildMemberAdd', member => {
 //||help menu
 client.on('message', message => {
 
-  if (message.content === '||help' && message.channel.id !== '613254058240770096' ) {
+  if (message.content === '||help' && message.channel.id !== 'CHANNEL_ID' ) {
     const embed = new Discord.MessageEmbed()
       .setTitle("You're witnessing the help page!")
       .setColor('0x0091F4')
@@ -38,7 +39,7 @@ client.on('message', message => {
 //||kick
 client.on('message', message => {
 
-  if (message.content.startsWith('||kick') && message.member.roles.cache.has('470942511762898945')) {
+  if (message.content.startsWith('||kick') && message.member.roles.cache.has('ROLE_ID')) {
 
     const user = message.mentions.users.first();
     const dUser = message.mentions.users.first();
@@ -71,7 +72,7 @@ client.on('message', message => {
 //||ban
 client.on('message', message => {
 
-  if (message.content.startsWith('||ban') && message.member.roles.cache.has('470942511762898945')) {
+  if (message.content.startsWith('||ban') && message.member.roles.cache.has('ROLE_ID')) {
     const user = message.mentions.users.first();
     const dUser = message.mentions.users.first();
     if (user) {
@@ -100,7 +101,7 @@ client.on('message', message => {
 //autoKick                                                                                  [NEEDS REVISION I.E. LESS STRICT PUNISHMENTS]
 client.on('message', message => {
 
-  let forbiddenWords = ["fuck", "bitch", "Fuck", "Bitch"];
+  let forbiddenWords = ["fuck", "bitch", "Fuck", "Bitch"]; //Add any words that you like
 
   for (var i = 0; i < forbiddenWords.length; i++) {
     if (message.content.includes(forbiddenWords[i])) {
@@ -110,7 +111,7 @@ client.on('message', message => {
       member
         .kick('Automod')
         .then(() => {
-          message.send(`Automod kicked ${member.tag}, watch your mouth guys!`)
+          message.send(`Automod kicked ${member.tag}, watch your mouth guys!`) //Currently not working yaaay
         })
         .catch(err => {
           message.send("Crazy coded me wrong so automod doesn't work lmao")
@@ -122,28 +123,11 @@ client.on('message', message => {
 });
 
 
-
-/*client.on('message', message => {                                                                                                 [EXPERIMENTAL FEATURE]
-
-  if (message.content.startsWith('||warn')) {
-    let dUser = message.guild.member(message.mentions.users.first()) || message.guild.members.get(args[0]);
-    if (!message.member.hasPermission("KICK_MEMBERS")) return message.reply("You can't use that command!")
-    if (!dUser) return message.channel.send("Can't find user!")
-    let dMessage = args.join(" ").slice(22);
-    if (dMessage.length < 1) return message.reply('what is the reason???')
-
-    dUser.send(`${dUser}, You have been warned for doing ${dMessage}`)
-
-    message.channel.send(`${dUser} has been warned for doing ${dMessage} :thumbsdown:`)
-  };
-});*/
-
-
 //Rules agreeement
 client.on('message', message => {
 
-        if (message.channel.id === '613254058240770096' && message.content === "I agree") {
-          let memberRole = message.guild.roles.cache.find(role => role.name === "Memberzzzz");
+        if (message.channel.id === 'RULES_CHANNEL_ID' && message.content === "I agree") {
+          let memberRole = message.guild.roles.cache.find(role => role.name === "ROLE_NAME");
           let member = message.member;
 
           member.roles.add(memberRole).catch(console.error);
