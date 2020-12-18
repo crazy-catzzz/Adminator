@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 'use strict';
 
 require('dotenv').config();
@@ -280,4 +279,3 @@ client.on('message', message => {
 
 
 client.login();
->>>>>>> a570cd94e00bc5e95371c6b44d05a81d801f40ac
