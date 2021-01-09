@@ -39,7 +39,7 @@ client.on('message', message => {
       .addFields(
         {name: '||help', value: 'Show this message'},
         {name: '||ban', value: 'Ban a member'},
-        {name: '||kick', value: 'Kick a member'}
+        {name: '||kick', value: 'Kick a member'},
       );
       message.channel.send(embed);
   };
