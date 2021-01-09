@@ -1,21 +1,31 @@
 'use strict';
 
 require('dotenv').config();
+const Config = require("./config.json");
 const Discord = require('discord.js');
 const client = new Discord.Client();
 
 client.on('ready', () => {
   console.log('I am ready!');
+  console.log(" ");
+  console.log("====================================================================");
+  console.log(" ");
+  console.log("config.json settings:");
+  console.log(" ");
+  console.log(Config);
 });
 
 //DMs probably won't work cause I suck at JS lol
 
 //Welcome message
 client.on('guildMemberAdd', member => {
+  if(Config.welcomemsg == true) {
 
-  const channel = member.guild.channels.cache.find(ch => ch.name === 'member-log');
-  if (!channel) return;
-  channel.send(`Welcome to the server, ${member}! Make sure to read the rules to avoid punishment!`);
+    const channel = member.guild.channels.cache.find(ch => ch.name === 'member-log');
+    if (!channel) return;
+    channel.send(`Welcome to the server, ${member}! Make sure to read the rules to avoid punishment!`);
+  };
+
 });
 
 
@@ -34,7 +44,6 @@ client.on('message', message => {
       message.channel.send(embed);
   };
 });
-
 
 //||kick
 client.on('message', message => {
@@ -100,41 +109,55 @@ client.on('message', message => {
 
 //autoKick                                                                                  [NEEDS REVISION I.E. LESS STRICT PUNISHMENTS]
 client.on('message', message => {
+if (Config.automod == true) {
 
-  let forbiddenWords = ["fuck", "bitch", "Fuck", "Bitch"]; //Add any words that you like
-
-  for (var i = 0; i < forbiddenWords.length; i++) {
-    if (message.content.includes(forbiddenWords[i])) {
+  for (var i = 0; i < Config.badwords.length; i++) {
+    if (message.content.includes(Config.badwords[i])) {
 
       let member = message.member;
 
       member
         .kick('Automod')
         .then(() => {
-          message.send(`Automod kicked ${member.tag}, watch your mouth guys!`) //Currently not working yaaay
+          message.channel.send(`Automod kicked ${member.tag}, watch your mouth guys!`) //Currently not working yaaay
         })
         .catch(err => {
-          message.send("Crazy coded me wrong so automod doesn't work lmao")
+          message.channel.send("Crazy coded me wrong so automod doesn't work lmao")
           console.error(err);
         });
       break;
     }
   }
+
+};
+  
 });
 
 
 //Rules agreeement
 client.on('message', message => {
+  if(Config.nocommunity == true) {
 
-        if (message.channel.id === process.env.RULES_CHANNEL_ID && message.content === "I agree") {
-          let memberRole = message.guild.roles.cache.find(role => role.name === process.env.MEMBER_ROLE_NAME);
-          let member = message.member;
+    if (message.channel.id === process.env.RULES_CHANNEL_ID && message.content === "I agree") {
+      let memberRole = message.guild.roles.cache.find(role => role.name === process.env.MEMBER_ROLE_NAME);
+      let member = message.member;
 
-          member.roles.add(memberRole).catch(console.error);
+      member.roles.add(memberRole).catch(console.error);
 
-        };
+    };    
+  };
+
 });
 
 
 
 client.login();
+
+
+//Keep bot awake
+const http = require('http');
+const server = http.createServer((req, res) => {
+  res.writeHead(200);
+  res.end('ok');
+});
+server.listen(3000);
