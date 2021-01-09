@@ -1,0 +1,6 @@
+{
+  "welcomemsg": true,
+  "automod": false,
+  "nocommunity": false,
+  "badwords": ["Fuck", "fuck", "Bitch", "bitch", "Asshole", "asshole"]
+}
