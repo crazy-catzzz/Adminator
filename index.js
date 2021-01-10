@@ -119,7 +119,7 @@ if (Config.automod == true) {
       member
         .kick('Automod')
         .then(() => {
-          message.channel.send(`Automod kicked ${member.tag}, watch your mouth guys!`) //Currently not working yaaay
+          message.channel.send(`Automod kicked ${member.tag}, watch your mouth guys!`)
         })
         .catch(err => {
           message.channel.send("Crazy coded me wrong so automod doesn't work lmao")
