@@ -19,7 +19,7 @@ For the hosting part follow the guide
 
 ## Configuration
 
-Once Adminator is up and running you can edit the `config.json` file to enable/disable features
+Once Adminator is up and running you can edit the `settings.json` file to enable/disable features
 
 Default:
 ```
@@ -27,7 +27,7 @@ Default:
   "welcomemsg": true,
   "automod": false,
   "nocommunity": false,
-  "automodpunishment": "kick"
+  "automodpunishment": "kick",
   "badwords": ["Fuck", "fuck", "Bitch", "bitch", "Asshole", "asshole"]
 }
 ```
