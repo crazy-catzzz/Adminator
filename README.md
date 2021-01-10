@@ -47,3 +47,8 @@ I'm going to explain these values:
 - badwords (`type: array`)
   - default: `["Fuck", "fuck", "Bitch", "bitch", "Asshole", "asshole"]`
   - Add/Remove filtered words for the `automod` feature
+  
+- automodpunishment (`type: string`)
+  - dafault: `kick`
+  - Change the punishment that automod gives a pertruder once they send a message with a forbidden word
+  - Options: `kick`, `delete`
