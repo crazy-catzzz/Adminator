@@ -1,6 +1,7 @@
 {
   "welcomemsg": true,
-  "automod": false,
+  "automod": true,
   "nocommunity": false,
+  "automodpunishment": "kick",
   "badwords": ["Fuck", "fuck", "Bitch", "bitch", "Asshole", "asshole"]
 }

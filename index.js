@@ -61,7 +61,8 @@ client.on('message', message => {
           .kick('Optional reason that will display in the audit logs')
           .then(() => {
             message.reply(`Successfully kicked ${user.tag}`)
-            dUser.send("You have been kicked from Crazy's hole!");
+            dUser.send("You have been kicked from Crazy's hole!")
+              .catch(console.error);
           })
           .catch(err => {
             message.reply('I was unable to kick the member');
@@ -88,13 +89,14 @@ client.on('message', message => {
       const member = message.guild.member(user);
       if (member) {
         member
-          .ban('Optional reason that will display in the audit logs')
+          .ban({reason: 'Optional reason'})
           .then(() => {
             message.reply(`Successfully banned ${user.tag}`)
-            dUser.send("You have been ***BANNED*** from Crazy's hole! If you want to appeal follow the instructions here: ");
+            dUser.send("You have been ***BANNED*** from Crazy's hole! If you want to appeal follow the instructions here: ")
+              .catch(console.error);
           })
           .catch(err => {
-            mesage.reply('I was unable to ban the member');
+            message.reply('I was unable to ban the member');
             console.error(err);
           });
       } else {
@@ -107,27 +109,50 @@ client.on('message', message => {
 });
 
 
-//autoKick                                                                                  [NEEDS REVISION I.E. LESS STRICT PUNISHMENTS]
+//automod
 client.on('message', message => {
 if (Config.automod == true) {
 
-  for (var i = 0; i < Config.badwords.length; i++) {
-    if (message.content.includes(Config.badwords[i])) {
+  //kick setting
+  if (Config.automodpunishment == "kick") {
+    for (var i = 0; i < Config.badwords.length; i++) {
+      if (message.content.includes(Config.badwords[i])) {
 
       let member = message.member;
+
+      message
+        .delete({timeout: 1})
+        .catch(err => {
+          message.channel.send("I can't delete messages REEEEEEEEEEEEEEEEEE")
+          console.error(err)
+        });
 
       member
         .kick('Automod')
         .then(() => {
-          message.channel.send(`Automod kicked ${member.tag}, watch your mouth guys!`)
+          message.channel.send(`Automod kicked ${message.author}, watch your mouth guys!`)
         })
         .catch(err => {
           message.channel.send("Crazy coded me wrong so automod doesn't work lmao")
           console.error(err);
         });
-      break;
+        break;
+      }
     }
   }
+  else if (Config.automodpunishment == "delete") {
+    for (var i = 0; i < Config.badwords.length; i++) {
+      if (message.content.includes(Config.badwords[i])) {
+        message
+        .delete({timeout: 1})
+        .catch(err => {
+          message.channel.send("Automod died lmao")
+          console.error(err);
+        });
+      }
+    }
+
+  };
 
 };
   
