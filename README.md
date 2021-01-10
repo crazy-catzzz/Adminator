@@ -27,6 +27,7 @@ Default:
   "welcomemsg": true,
   "automod": false,
   "nocommunity": false,
+  "automodpunishment": "kick"
   "badwords": ["Fuck", "fuck", "Bitch", "bitch", "Asshole", "asshole"]
 }
 ```
