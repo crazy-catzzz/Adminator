@@ -107,12 +107,14 @@ client.on('message', message => {
 });
 
 
-//autoKick                                                                                  [NEEDS REVISION I.E. LESS STRICT PUNISHMENTS]
+//automod                                                                                  [NEEDS REVISION I.E. LESS STRICT PUNISHMENTS]
 client.on('message', message => {
 if (Config.automod == true) {
 
-  for (var i = 0; i < Config.badwords.length; i++) {
-    if (message.content.includes(Config.badwords[i])) {
+  //kick setting
+  if (Config.automodpunishment == "kick") {
+    for (var i = 0; i < Config.badwords.length; i++) {
+      if (message.content.includes(Config.badwords[i])) {
 
       let member = message.member;
 
@@ -125,9 +127,19 @@ if (Config.automod == true) {
           message.channel.send("Crazy coded me wrong so automod doesn't work lmao")
           console.error(err);
         });
-      break;
+        break;
+      }
     }
-  }
+  };
+  else if (Config.automodpunishment == "delete") {
+    
+    message
+      .delete({timeout: 1})
+      .catch(err => {
+        message.channel.send("Automod died lmao")
+        console.error(err)
+      });
+  };
 
 };
   
