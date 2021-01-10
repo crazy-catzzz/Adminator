@@ -1,7 +1,7 @@
 'use strict';
 
 require('dotenv').config();
-const Config = require("./config.json");
+const Config = require("./settings.json");
 const Discord = require('discord.js');
 const client = new Discord.Client();
 
