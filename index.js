@@ -1,6 +1,7 @@
 'use strict';
 
 require('dotenv').config();
+require('./dashboard/server.js')
 const Config = require("./settings.json");
 const Discord = require('discord.js');
 const client = new Discord.Client();
@@ -185,4 +186,4 @@ const server = http.createServer((req, res) => {
   res.writeHead(200);
   res.end('ok');
 });
-server.listen(3000);
+server.listen(3001);
