@@ -1,11 +1,13 @@
-nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
+nav.navbar.navbar-expand-lg.navbar-transparent.bg-transparent
   .container-fluid
-    a.navbar-brand(href='#') Adminator
-    button.navbar-toggler(type='button', data-bs-toggle='collapse', data-bs-target='#navbarText', aria-controls='navbarText', aria-expanded='false', aria-label='Toggle navigation')
+    a.navbar-brand(href='/') Adminator
+    button.navbar-toggler(type='button', data-bs-toggle='collapse', data-bs-target='#navbar', aria-controls='navbar', aria-expanded='false', aria-label='Toggle navigation')
       span.navbar-toggler-icon
-    #navbarText.collapse.navbar-collapse
+    #navbar.collapse.navbar-collapse
       ul.navbar-nav.me-auto.mb-2.mb-lg-0
         li.nav-item
-          a.nav-link(href='https://github.com/miao704g/Adminator') GitHub
+          a(style='color: white;').nav-link(href='https://github.com/miao704g/Adminator') GitHub
         li.nav-item
-          a.nav-link(href='/info') Info
+          a(style='color: white;').nav-link(href='/info') Info
+        li.nav-item
+          a(style='color: white;').nav-link(href='/commands') Commands

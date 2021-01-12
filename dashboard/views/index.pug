@@ -1,20 +1,15 @@
-include includes/header.pug
-body
-  include includes/navbar.pug
-  include includes/jumbotronv4.pug
-  .jumbotron.text-center.bg-dark
-    h1(style='color: white;').display-3 Adminator
-    p(style='color: white;').lead Free. Open Source. Easy.
-    button.btn.btn-light Go to config
-  .jumbotron.text-center.bg-dark
-    h2(style='color: white;').display-1 Welcome to your own bot dashboard.
-    p(style='color: white;').lead You created it ;)
-  .jumbotron.text-center.bg-dark
-    p
-  .jumbotron.text-center.bg-dark
-    p
-  .jumbotron.text-center.bg-dark
-    p
-
+doctype
+html(lang="en")
+  head
+    include includes/header.pug
+    
+    link(rel='sylesheet', href='../assets/index.css')
+  body(style='background-color: black')
+    include includes/navbar.pug
+    include includes/jumbotronv4.pug
+    .jumbotron.text-center.bg-transparent
+      h1(style='color: #1d16e2;').display-3 Adminator
+      p(style='color: #609ee5;').lead Free. Open Source. Easy.
+      button.btn.btn-light Go to config
 
 
