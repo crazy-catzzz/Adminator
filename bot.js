@@ -25,12 +25,13 @@ client.on('guildMemberAdd', member => {
     const channel = member.guild.channels.cache.find(ch => ch.name === 'member-log');
     if (!channel) return;
     channel.send(`Welcome to the server, ${member}! Make sure to read the rules to avoid punishment!`);
+    member.send(`Welcome to the server, ${member}! Make sure to read the rules to avoid punishment!`)
   };
 
 });
 
 
-//||help menu
+//message event
 client.on('message', message => {
 
   if (message.content === '||help' && message.channel.id !== process.env.RULES_CHANNEL_ID) {
@@ -44,11 +45,8 @@ client.on('message', message => {
       );
       message.channel.send(embed);
   };
-});
 
-//||kick
-client.on('message', message => {
-
+  //kick
   if (message.content.startsWith('||kick') && message.member.roles.cache.has(process.env.ADMIN_ROLE_ID)) {
 
     const user = message.mentions.users.first();
@@ -77,12 +75,8 @@ client.on('message', message => {
       message.reply("You didn't mention the user to kick!");
     }
   }
-});
 
-
-//||ban
-client.on('message', message => {
-
+  //ban
   if (message.content.startsWith('||ban') && message.member.roles.cache.has(process.env.ADMIN_ROLE_ID)) {
     const user = message.mentions.users.first();
     const dUser = message.mentions.users.first();
@@ -107,61 +101,54 @@ client.on('message', message => {
       message.reply("You didn't mention the user to ban!");
     }
   }
-});
 
+  //automod
+  if (Config.automod == true) {
 
-//automod
-client.on('message', message => {
-if (Config.automod == true) {
+    //kick setting
+    if (Config.automodpunishment == "kick") {
+      for (var i = 0; i < Config.badwords.length; i++) {
+        if (message.content.includes(Config.badwords[i])) {
 
-  //kick setting
-  if (Config.automodpunishment == "kick") {
-    for (var i = 0; i < Config.badwords.length; i++) {
-      if (message.content.includes(Config.badwords[i])) {
+        let member = message.member;
 
-      let member = message.member;
-
-      message
-        .delete({timeout: 1})
-        .catch(err => {
-          message.channel.send("I can't delete messages REEEEEEEEEEEEEEEEEE")
-          console.error(err)
-        });
-
-      member
-        .kick('Automod')
-        .then(() => {
-          message.channel.send(`Automod kicked ${message.author}, watch your mouth guys!`)
-        })
-        .catch(err => {
-          message.channel.send("Crazy coded me wrong so automod doesn't work lmao")
-          console.error(err);
-        });
-        break;
-      }
-    }
-  }
-  else if (Config.automodpunishment == "delete") {
-    for (var i = 0; i < Config.badwords.length; i++) {
-      if (message.content.includes(Config.badwords[i])) {
         message
-        .delete({timeout: 1})
-        .catch(err => {
-          message.channel.send("Automod died lmao")
-          console.error(err);
-        });
+          .delete({timeout: 1})
+          .catch(err => {
+            message.channel.send("I can't delete messages REEEEEEEEEEEEEEEEEE")
+            console.error(err)
+          });
+
+        member
+          .kick('Automod')
+          .then(() => {
+            message.channel.send(`Automod kicked ${message.author}, watch your mouth guys!`)
+          })
+          .catch(err => {
+            message.channel.send("Crazy coded me wrong so automod doesn't work lmao")
+            console.error(err);
+          });
+          break;
+        }
       }
     }
+    else if (Config.automodpunishment == "delete") {
+      for (var i = 0; i < Config.badwords.length; i++) {
+        if (message.content.includes(Config.badwords[i])) {
+          message
+          .delete({timeout: 1})
+          .catch(err => {
+            message.channel.send("Automod died lmao")
+            console.error(err);
+          });
+        }
+      }
+
+    };
 
   };
 
-};
-  
-});
-
-
-//Rules agreeement
-client.on('message', message => {
+  //nocommunity rules agreement
   if(Config.nocommunity == true) {
 
     if (message.channel.id === process.env.RULES_CHANNEL_ID && message.content === "I agree") {
@@ -172,18 +159,6 @@ client.on('message', message => {
 
     };    
   };
-
-});
-
-
+})
 
 client.login();
-
-
-//Keep bot awake
-const http = require('http');
-const server = http.createServer((req, res) => {
-  res.writeHead(200);
-  res.end('ok');
-});
-server.listen(3001);

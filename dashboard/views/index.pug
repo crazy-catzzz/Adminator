@@ -3,13 +3,14 @@ html(lang="en")
   head
     include includes/header.pug
     
-    link(rel='sylesheet', href='../assets/index.css')
-  body(style='background-color: black')
+    link(rel='sylesheet', href='css/index.css')
+
+  body(style='background-color: black; overflow-x: hidden; overflow-y: hidden;')
     include includes/navbar.pug
     include includes/jumbotronv4.pug
     .jumbotron.text-center.bg-transparent
-      h1(style='color: #1d16e2;').display-3 Adminator
-      p(style='color: #609ee5;').lead Free. Open Source. Easy.
-      button.btn.btn-light Go to config
+      h1(style='color: white; margin-top: 25vh;').display-3 Adminator
+      p(style='color: white;').lead Free. Open Source. Easy.
+      button.btn.btn-light(href='/add') Add
 
 
