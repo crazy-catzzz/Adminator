@@ -1,5 +1,5 @@
 # Adminator
-Private admin bot for a Discord server
+Self-hosted admin Discord bot
 
 Now on repl.it
 
