@@ -14,14 +14,10 @@ nav.navbar.navbar-expand-lg.navbar-transparent.bg-transparent
             i.fas.fa-info-circle(style='color: white;')
             span.pl-1(style='color: white;') Info
         li.nav-item
-          a.nav-link(href='/commands') 
-            i.fas.fa-code(style='color: white; margin-right: 0.5vh;')
-            span(style='color: white;') Commands
-        li.nav-item
           if user 
             .dropdown
               .dropdown-toggle(style='background-color: transparent; margin-top: 0.5vh;', type='button', data-bs-toggle='dropdown', aria-expanded='false')
-                img.user-avatar(style='margin-right: 1vh; margin-left: 1vh; border-radius: 50%;', src=user.avatarUrl(32))
+                img.user-avatar(style='margin-right: 1vh; border-radius: 50%;', src=user.avatarUrl(32))
                 span(style='color: white;') #{user.username}
               ul.dropdown-menu.dropdown-menu-dark(style='background-color: transparent;', aria-labelledby='dropdownMenuButton2')
                 li

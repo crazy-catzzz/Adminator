@@ -3,7 +3,6 @@ const authClient = require('./auth-client');
 module.exports.updateUser = async (req, res, next) => {
   try {
     const key = res.cookies.get('key');
-    console.log(key);
     if (key)
       res.locals.user = await authClient.getUser(key);
   } finally {
@@ -11,4 +10,9 @@ module.exports.updateUser = async (req, res, next) => {
   }
 }
 
-module.exports.validateUser
+module.exports.validateUser = async (req, res, next) => {
+  res.locals.user
+    ? next()
+    : res.render('errors/401');
+
+};

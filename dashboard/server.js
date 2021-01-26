@@ -20,7 +20,7 @@ app.use('/',
   middleware.updateUser, rootRoutes, 
   authRoutes
 );
-app.use('/dashboard', dashboardRoutes)
+app.use('/dashboard', middleware.validateUser, dashboardRoutes);
 
 app.get('*', (rew, res) => res.render('./errors/404'))
 

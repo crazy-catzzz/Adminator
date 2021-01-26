@@ -1,9 +1,11 @@
 doctype
 html(lang="en")
   head
+    style
+      //- include ../assets/css/index.css
     include includes/header.pug
     
-    link(rel='sylesheet', href='css/index.css')
+    link(rel='stylesheet', href='assets/css/index.css')
 
   body(style='background-color: black; overflow-x: hidden; overflow-y: hidden;')
     include includes/navbar.pug
