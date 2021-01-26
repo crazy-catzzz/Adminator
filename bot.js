@@ -1,20 +1,44 @@
 'use strict';
 
+const fs = require('fs'); //node.js native filesystem
+
 require('dotenv').config();
+<<<<<<< HEAD:bot.js
 require('./dashboard/server.js')
+=======
+require('./keepAwake/awake.js');
+>>>>>>> master:index.js
 const Config = require("./settings.json");
 const Discord = require('discord.js');
 const client = new Discord.Client();
 
+//Command handler
+client.commands = new Discord.Collection();
+const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
+
+for (const file of commandFiles) {
+	const command = require(`./commands/${file}`);
+
+	// set a new item in the Collection
+	// with the key as the command name and the value as the exported module
+	client.commands.set(command.name, command);
+}
+//command handler end
+
+
+//ready event
 client.on('ready', () => {
-  console.log('I am ready!');
+  console.log('Sucessfully logged in!');
   console.log(" ");
   console.log("====================================================================");
   console.log(" ");
-  console.log("config.json settings:");
+  console.log("settings.json settings:");
   console.log(" ");
   console.log(Config);
+  client.user.setActivity(`${Config.prefix}help`, {type: "PLAYING"});
 });
+//ready event end
+
 
 //DMs probably won't work cause I suck at JS lol
 
@@ -30,10 +54,16 @@ client.on('guildMemberAdd', member => {
 
 });
 
+<<<<<<< HEAD:bot.js
 
 //message event
+=======
+//commands
+>>>>>>> master:index.js
 client.on('message', message => {
+	if (!message.content.startsWith(Config.prefix) || message.author.bot) return;
 
+<<<<<<< HEAD:bot.js
   if (message.content === '||help' && message.channel.id !== process.env.RULES_CHANNEL_ID) {
     const embed = new Discord.MessageEmbed()
       .setTitle("You're witnessing the help page!")
@@ -101,6 +131,21 @@ client.on('message', message => {
       message.reply("You didn't mention the user to ban!");
     }
   }
+=======
+    const args = message.content.slice(Config.prefix.length).trim().split(/ +/);
+    const command = args.shift().toLowerCase();
+
+    if (!client.commands.has(command)) return;
+
+    try {
+      client.commands.get(command).execute(message, args);
+    } catch (error) {
+      console.error(error);
+      message.reply('there was an error trying to execute that command!');
+    }
+});
+//commands end
+>>>>>>> master:index.js
 
   //automod
   if (Config.automod == true) {
@@ -161,4 +206,12 @@ client.on('message', message => {
   };
 })
 
+<<<<<<< HEAD:bot.js
 client.login();
+=======
+});
+
+
+
+client.login();
+>>>>>>> master:index.js
