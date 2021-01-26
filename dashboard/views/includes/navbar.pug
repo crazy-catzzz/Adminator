@@ -1,0 +1,32 @@
+nav.navbar.navbar-expand-lg.navbar-transparent.bg-transparent
+  .container-fluid
+    a.navbar-brand(style='color: white;', href='/') Adminator
+    button.navbar-toggler(type='button', data-bs-toggle='collapse', data-bs-target='#navbar', aria-controls='navbar', aria-expanded='false', aria-label='Toggle navigation')
+      span.navbar-toggler-icon
+    #navbar.collapse.navbar-collapse
+      ul.navbar-nav.me-auto.mb-2.mb-lg-0
+        li.nav-item
+          a.nav-link(href='https://github.com/miao704g/Adminator')
+            i.fab.fa-github(style='color: white;')
+            span.pl-1(style='color: white;') GitHub
+        li.nav-item
+          a.nav-link(href='/info')
+            i.fas.fa-info-circle(style='color: white;')
+            span.pl-1(style='color: white;') Info
+        li.nav-item
+          if user 
+            .dropdown
+              .dropdown-toggle(style='background-color: transparent; margin-top: 0.5vh;', type='button', data-bs-toggle='dropdown', aria-expanded='false')
+                img.user-avatar(style='margin-right: 1vh; border-radius: 50%;', src=user.avatarUrl(32))
+                span(style='color: white;') #{user.username}
+              ul.dropdown-menu.dropdown-menu-dark(style='background-color: transparent;', aria-labelledby='dropdownMenuButton2')
+                li
+                  a.dropdown-item.active(style='color: white;', href='/dashboard') Dashboard
+                li
+                  hr
+                li
+                  a.dropdown-item(style='color: white;', href='/logout') Logout
+          else 
+            a.nav-link(href='/login')
+              i.fas.fa-sign-in-alt(style='color: white;')
+              span.pl-1(style='color: white;') Login

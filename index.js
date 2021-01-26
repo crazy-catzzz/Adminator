@@ -3,7 +3,7 @@
 const fs = require('fs'); //node.js native filesystem
 
 require('dotenv').config();
-require('./keepAwake/awake.js');
+
 const Config = require("./settings.json");
 const Discord = require('discord.js');
 const client = new Discord.Client();
@@ -45,6 +45,7 @@ client.on('guildMemberAdd', member => {
     const channel = member.guild.channels.cache.find(ch => ch.name === 'member-log');
     if (!channel) return;
     channel.send(`Welcome to the server, ${member}! Make sure to read the rules to avoid punishment!`);
+    member.send(`Welcome to the server, ${member}! Make sure to read the rules to avoid punishment!`)
   };
 
 });
@@ -132,7 +133,3 @@ client.on('message', message => {
   };
 
 });
-
-
-
-client.login();
