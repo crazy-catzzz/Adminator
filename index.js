@@ -3,7 +3,7 @@
 const fs = require('fs'); //node.js native filesystem
 
 require('dotenv').config();
-require('./dashboard/server.js')
+
 const Config = require("./settings.json");
 const Discord = require('discord.js');
 const client = new Discord.Client();
@@ -133,5 +133,3 @@ client.on('message', message => {
   };
 
 });
-
-client.login();
