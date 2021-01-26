@@ -3,5 +3,6 @@
   "automod": false,
   "nocommunity": false,
   "automodpunishment": "kick",
-  "badwords": ["Fuck", "fuck", "Bitch", "bitch", "Asshole", "asshole"]
+  "badwords": ["Fuck", "fuck", "Bitch", "bitch", "Asshole", "asshole"],
+  "prefix": "a/"
 }
