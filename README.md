@@ -29,6 +29,7 @@ Default:
   "nocommunity": false,
   "automodpunishment": "kick",
   "badwords": ["Fuck", "fuck", "Bitch", "bitch", "Asshole", "asshole"]
+  "prefix": "a/"
 }
 ```
 
@@ -53,3 +54,7 @@ I'm going to explain these values:
   - dafault: `kick`
   - Change the punishment that automod gives a pertruder once they send a message with a forbidden word
   - Options: `kick`, `delete`
+
+- prefix (`type: string`)
+  - default: `a/`
+  - Change the bot's prefix
