@@ -1,3 +1,13 @@
 #sidebar(style='height: 100vh; padding: 10px;').float-left.bg-dark
   a(href='/dashboard')
-    .icon(style='border-radius: 50%;')
+    .icon
+      img(alt=user.username, src=user.avatarUrl(64), style='border-radius: 50%;')
+  hr
+  each guild in guilds
+    a(href='/servers/' + guild.id)
+      .icon(style='border-radius: 50%')
+        img(style='border-radius: 50%', alt=guild.name, src=guild.iconURL({ dynamic: true, size: 64 }))
+
+  a(href='/invite')
+    .icon
+      p.text-success.text-center(style='border-radius: 50%; padding-top: 7.5px', alt=user.username, src=user.avatarUrl(64)) #[i.fas.fa-plus]

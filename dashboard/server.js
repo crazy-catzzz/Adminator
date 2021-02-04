@@ -18,9 +18,9 @@ app.locals.basedir = './assets';
 
 app.use('/', 
   middleware.updateUser, rootRoutes, 
-  authRoutes
+  authRoutes, 
+  middleware.validateUser, middleware.updateGuilds, dashboardRoutes
 );
-app.use('/dashboard', middleware.validateUser, dashboardRoutes);
 
 app.get('*', (rew, res) => res.render('./errors/404'))
 

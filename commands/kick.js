@@ -2,7 +2,8 @@ module.exports = {
 	name: 'kick',
 	description: 'Kick someone',
 	execute(message, args) {
-    if (message.member.roles.cache.has(process.env.ADMIN_ROLE_ID)) {
+    let kickPerms = message.channel.permissionsFor(message.member).has("KICK_MEMBERS");
+    if (kickPerms) {
       const user = message.mentions.users.first();
       const dUser = message.mentions.users.first();
       if (user) {
@@ -11,10 +12,10 @@ module.exports = {
         if (member) {
 
           member
-            .kick('Optional reason that will display in the audit logs')
+            .kick('Optional reason')
             .then(() => {
-              message.reply(`Successfully kicked ${user.tag}`)
-              dUser.send("You have been kicked from Crazy's hole!")
+              message.reply(`successfully kicked ${user.tag}`)
+              dUser.send("You have been kicked")
                 .catch(console.error);
             })
             .catch(err => {
@@ -23,11 +24,11 @@ module.exports = {
             });
         } else {
 
-          message.reply("That user isn't in this server!");
+          message.reply("that user isn't in this server!");
         }
       } else {
-        message.reply("You didn't mention the user to kick!");
+        message.reply("you didn't mention the user to kick!");
       }
-    }
+    } else message.reply("you don't have the rights to do that!");
 	},
 };

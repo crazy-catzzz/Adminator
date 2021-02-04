@@ -2,7 +2,8 @@ module.exports = {
 	name: 'ban',
 	description: 'Ban someone',
 	execute(message, args) {
-    if(message.member.roles.cache.has(process.env.ADMIN_ROLE_ID)) {
+    let banPerms = message.channel.permissionsFor(message.member).has("BAN_MEMBERS");
+    if(banPerms) {
       const user = message.mentions.users.first();
       const dUser = message.mentions.users.first();
       if (user) {
@@ -11,8 +12,8 @@ module.exports = {
           member
             .ban({reason: 'Optional reason'})
             .then(() => {
-              message.reply(`Successfully banned ${user.tag}`)
-              dUser.send("You have been ***BANNED*** from Crazy's hole! If you want to appeal follow the instructions here: ")
+              message.reply(`successfully banned ${user.tag}!`)
+              dUser.send("You have been ***BANNED***")
                 .catch(console.error);
             })
             .catch(err => {
@@ -20,11 +21,11 @@ module.exports = {
               console.error(err);
             });
         } else {
-          message.reply("That user isn't in this server!");
+          message.reply("that user isn't in this server!");
         }
       } else {
-        message.reply("You didn't mention the user to ban!");
+        message.reply("you didn't mention the user to ban!");
       }
-    }
+    } else message.reply("you don't have the rights to do that!")
 	},
 };
